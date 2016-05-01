@@ -19,5 +19,8 @@
   "homepage": "https://github.com/valentin-nemcev/slidy#readme",
   "devDependencies": {
     "live-server": "^1.0.0"
+  },
+  "dependencies": {
+    "milligram": "^1.1.0"
   }
 }
