@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Slidy sample presentation</title>
+  </head>
+  <body>
+    <!-- https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML_sections_and_outlines#The_HTML5_outline_algorithm -->
+    <div style="display: none">
+      <!-- Document structure reference -->
+      <section>
+        <h1>Forest elephants</h1> 
+        <section>
+          <h1>Introduction</h1>
+          <p>In this section, we discuss the lesser known forest elephants.</p>
+        </section>
+        <section>
+          <h1>Habitat</h1>
+          <p>Forest elephants do not live in trees but among them.</p>
+        </section>
+        <aside>
+          <p>advertising block</p>
+        </aside>
+      </section>
+      <footer>
+        <p>(c) 2010 The Example company</p>
+      </footer>
+    </div>
+
+    <!-- https://github.com/h5o/h5o-js -->
+
+
+    <section class="presentation">
+      <section class="slide">
+        <h1>Slidy</h1>
+        <p>Lightweight framework for authoring and presenting slideshows</p>
+        <p>Made by <a href="mailto:mail@valentin-nemcev.com">Valentin Nemcev</a>
+          while applying for a job at <a href="http://yandex.com">Yandex</a>
+      </section>
+      <section class="slide">
+        <h1>How it works</h1>
+        <p>You write your presentation using HTML (or something that compiles
+          to it) following specific structure</p>
+        <p>You use CSS to style your presentation</p>
+        <p>You use Slidy JavaScript library to show your presentation yourself
+          slide by slide or embed it in a webpage</p>
+      </section>
+      <section class="slide">
+        <h1>Design goals</h1>
+        <ul>
+          <li>
+            <p>Use nested list to structure presentations</p>
+            <ol>
+              <li>Presentation</li>
+              <li>Section</li>
+              <li>(Sub-section)</li>
+              <li>Slide</li>
+              <li>List item</li>
+              <li>(Sub-list item)</li>
+            </ol>
+          </li>
+          <li>Have a “slide sorter” view, when multiple slides are displayed on
+            one screen</li>
+          <li>Only HTML should be enough to make a presentation, additional CSS
+            may be used when required</li>
+        </ul>
+      </section>
+    </section>
+  </body>
+</html>
