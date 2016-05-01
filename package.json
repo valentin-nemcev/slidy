@@ -1,0 +1,19 @@
+{
+  "name": "slidy",
+  "version": "0.1.0",
+  "description": "Slidy is a small framework for making and showing presentations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valentin-nemcev/slidy.git"
+  },
+  "author": "Valentin Nemcev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/valentin-nemcev/slidy/issues"
+  },
+  "homepage": "https://github.com/valentin-nemcev/slidy#readme"
+}
