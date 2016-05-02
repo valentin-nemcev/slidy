@@ -1,9 +1,12 @@
 .slide {
-  outline: 1px solid gray;
+  border: 1px solid gray;
+  padding: 1em;
+  margin: 0.25em;
 }
 
 .slide.presented {
-  outline: none;
+  border: none;
+  margin: 0em;
   position: absolute;
   left: 0;
   top: 0;
