@@ -1,4 +1,4 @@
-import jQuery from "jquery";
+import $ from 'jquery';
 
 const slideSelector = '.slide';
 const presentationSelector = '.presentation';
@@ -11,7 +11,7 @@ function presentSlide(slideToPresent) {
 
   $allSlides.removeClass('presented');
   $slideToPresent.addClass('presented');
-};
+}
 
 function presentNextSlide(currentSlide) {
   const $currentSlide = $(currentSlide);
@@ -27,24 +27,23 @@ function stopPresenting(currentSlide) {
   $allSlides.removeClass('presented');
 }
 
-jQuery(document).ready(
-  ($) => {
-    $(document).on(
-      'slidy:presentSlide click',
-      slideSelector,
-      function () { presentSlide(this); }
-    )
 
-    $(document).on(
-      'slidy:presentNextSlide click',
-      slideSelector + '.presented',
-      function () { presentNextSlide(this); }
-    )
+$(document).ready(() => {
+  $(document).on(
+    'slidy:presentSlide click',
+    slideSelector,
+    function () { presentSlide(this); }
+  );
 
-    $(document).on(
-      'slidy:stopPresenting dblclick',
-      slideSelector + '.presented',
-      function () { stopPresenting(this); }
-    )
-  }
-)
+  $(document).on(
+    'slidy:presentNextSlide click',
+    slideSelector + '.presented',
+    function () { presentNextSlide(this); }
+  );
+
+  $(document).on(
+    'slidy:stopPresenting dblclick',
+    slideSelector + '.presented',
+    function () { stopPresenting(this); }
+  );
+});
