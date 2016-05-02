@@ -14,6 +14,8 @@ function presentSlide(nextSlide) {
   $currentSlides.removeClass('presented');
   $nextSlide.addClass('presented');
   $container.addClass('presenting');
+
+  window.history.pushState(null, null, '#slidy');
 }
 
 function switchSlide(target, nextOrPrev) {
@@ -30,6 +32,10 @@ function stopPresenting(target) {
 
   $currentSlides.removeClass('presented');
   $container.removeClass('presenting');
+
+  // Remove hash from location
+  const loc = window.location;
+  window.history.pushState(null, null, loc.pathname + loc.search);
 }
 
 
@@ -61,4 +67,13 @@ $(document).ready(() => {
       return false;
     }
   );
+
+
+  $(window).on('popstate', () => {
+    if (window.location.hash === '#slidy') {
+      presentSlide($('.slide').first());
+    } else {
+      stopPresenting($('.presentation'));
+    }
+  }).trigger('popstate');
 });
