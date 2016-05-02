@@ -33,7 +33,7 @@
 
     <section class="presentation">
       <section class="slide">
-        <h1>Slidy</h1>
+        <h1 class="h1">Slidy</h1>
         <p>Lightweight framework for authoring and presenting slideshows</p>
         <p>Made by <a href="mailto:mail@valentin-nemcev.com">Valentin Nemcev</a>
           while applying for a job at <a href="http://yandex.com">Yandex</a>
@@ -50,7 +50,7 @@
         <h1>Design goals</h1>
         <ul>
           <li>
-            <p>Use nested list to structure presentations</p>
+            Use nested list to structure presentations
             <ol>
               <li>Presentation</li>
               <li>Section</li>
@@ -60,11 +60,34 @@
               <li>(Sub-list item)</li>
             </ol>
           </li>
+          <li>Have an outline view based on nested list structure</li>
+          <li>Perfect UI</li>
           <li>Have a “slide sorter” view, when multiple slides are displayed on
             one screen</li>
-          <li>Only HTML should be enough to make a presentation, additional CSS
-            may be used when required</li>
+          <li>Write presentation as HTML or some other templating language,
+            have live preview in browser, have an opinionated set of CSS and JS
+            defaults, extend it only in special circumstances,
+            start with a template/reference project</li>
+          <li>No presenter view</li>
+          <li>Bonus goal: produce handouts and presenter notes ready for
+            printing</li>
         </ul>
+      </section>
+      <section>
+        <h1>Two parts</h1>
+        <p><strong>Slidy-presenter</strong> — “runtime”, a JS library used for
+          presenting</p>
+        <p><strong>Slidy-template</strong> — author environment,
+          a project template used for authoring</p>
+      </section>
+      <section>
+        <h1>Slidy-presenter</h1>
+        <p>Full-screen slide-show view</p>
+        <p>Slide sorter view</p>
+        <p>Embedded slide-show view</p>
+      </section>
+      <section>
+        <h1>Slidy-template</h1>
       </section>
     </section>
   </body>
