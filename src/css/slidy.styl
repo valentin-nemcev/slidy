@@ -1,19 +1,107 @@
+@require "../../node_modules/kouto-swiss/index.styl"
+@require "../../node_modules/axis/axis/index.styl"
+
+// Kouto Swiss
+box-sizing-reset()
+normalize()
+
+
+
+// Layout
+
+.presentation
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+  padding-top: 0.25rem
+  margin: 0 0.25rem
+
+
 .slide
-  border 1px solid gray
-  padding 1em
-  margin 0.25em
+  padding: 1em
+
+  &:not(.presented)
+    border: 1px solid gray
+    display: inline-block
+    width: calc(25% - 0.25rem)
+    margin-bottom: 0.25rem
+    height: (25 / (4/3)) vw
+    font-size: 50%
 
   &.presented
-    border none
-    margin 0em
-    position fixed
-    left 0
-    top 0
-    width 100%
-    height 100%
-    background white
+    border: none
+    margin: 0em
+    position: fixed
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    background: white
 
 .presenting
-  overflow hidden
+  font-size: 200%
+  overflow: hidden
 
 
+// Content
+
+// Axis
+
+$font-stack = $helvetica-neue
+$font-size = 16
+$font-color = #333
+$default-color = $yellow
+
+base()
+
+// Don't use Axis stuff related to font size for slide content, because Axis
+// likes to use rem and we want to use em, so everything inside the slide would
+// scale itself
+
+
+$h3-font-size = 1em
+
+-heading($level)
+  font-size: modular-scale($h3-font-size, 3 - $level)
+  text-rendering: optimizelegibility
+  font-weight: bold
+  text-margin()
+  -line-height()
+
+
+h1
+  -heading(1)
+
+h2
+  -heading(2)
+
+h3
+  -heading(3)
+
+h4
+  -heading(4)
+
+h5
+  -heading(5)
+
+h6
+  -heading(6)
+
+
+a
+  color: blue
+  text-decoration: underline
+
+  &:hover
+    color: darken(@color, 20%)
+
+  &:visited
+    opacity: .8
+
+p, li
+  paragraph(1em)
+
+
+
+kbd
+  code: black

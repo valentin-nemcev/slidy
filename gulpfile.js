@@ -37,7 +37,7 @@ gulp.task('build-js', () => {
   });
 
   return b.bundle()
-  .on('error', function (error) { gutil.log(error); this.emit('end'); })
+    .on('error', function (error) { gutil.log(error); this.emit('end'); })
 
     .pipe(source('slidy.js'))
     .pipe(buffer())
@@ -52,6 +52,7 @@ gulp.task('build-css', () =>
   gulp.src('./src/css/slidy.styl')
     .pipe(sourcemaps.init())
     .pipe(stylus())
+    .on('error', function (error) { gutil.log(error); this.emit('end'); })
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist/'))
 );
