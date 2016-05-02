@@ -1,0 +1,13 @@
+.slide {
+  outline: 1px solid gray;
+}
+
+.slide.presented {
+  outline: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
