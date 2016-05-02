@@ -1,4 +1,3 @@
-const path = require('path');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const sourcemaps = require('gulp-sourcemaps');
@@ -9,8 +8,8 @@ const babelify = require('babelify');
 require('gulp-watch');
 const server = require('gulp-server-livereload');
 const eslint = require('gulp-eslint');
-
 const stylus = require('gulp-stylus');
+const copy = require('gulp-copy');
 
 gulp.task('lint', () =>
   // Be sure to return the stream from the task;
@@ -31,7 +30,7 @@ gulp.task('lint', () =>
 gulp.task('build-js', () => {
   // set up the browserify instance on a task basis
   const b = browserify({
-    entries: './src/js/presenter.js',
+    entries: './src/js/slidy.js',
     debug: true,
     // defining transforms here will avoid crashing your stream
     transform: [babelify],
@@ -40,7 +39,7 @@ gulp.task('build-js', () => {
   return b.bundle()
   .on('error', function (error) { gutil.log(error); this.emit('end'); })
 
-    .pipe(source('presenter.js'))
+    .pipe(source('slidy.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({ loadMaps: true }))
     // Add transformation tasks to the pipeline here.
@@ -50,28 +49,33 @@ gulp.task('build-js', () => {
 });
 
 gulp.task('build-css', () =>
-  gulp.src('./src/css/presentation.styl')
+  gulp.src('./src/css/slidy.styl')
     .pipe(sourcemaps.init())
     .pipe(stylus())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist/'))
 );
 
+gulp.task('build-html', () =>
+  gulp.src('./content/*.html')
+    .pipe(copy('./dist/', { prefix: 1 }))
+);
+
 gulp.task('webserver', () =>
-  gulp.src('.')
+  gulp.src('dist')
     .pipe(server({
-      livereload: {
-        enable: true,
-        filter(filename, cb) {
-          // ['./dist/**/*', '*.html']
-          cb(filename.indexOf(path.join(__dirname, 'dist')) === 0 || filename.match(/\.html$/));
-        },
-      },
-      directoryListing: true,
+      livereload: true,
+      directoryListing: false,
       // open: true
     }))
 );
 
-gulp.task('build-watch', () => gulp.watch('src/**/*', ['build-js', 'build-css']));
+gulp.task('build', ['build-js', 'build-css', 'build-html']);
+
+
+gulp.task(
+  'build-watch',
+  () => gulp.watch(['src/**/*', 'content/**/*'], ['build'])
+);
 
 gulp.task('dev-server', ['build-watch', 'webserver']);
