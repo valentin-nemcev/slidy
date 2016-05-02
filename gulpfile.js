@@ -8,8 +8,9 @@ const browserify = require('browserify');
 const babelify = require('babelify');
 require('gulp-watch');
 const server = require('gulp-server-livereload');
-
 const eslint = require('gulp-eslint');
+
+const stylus = require('gulp-stylus');
 
 gulp.task('lint', () =>
   // Be sure to return the stream from the task;
@@ -27,7 +28,7 @@ gulp.task('lint', () =>
 );
 
 
-gulp.task('build', () => {
+gulp.task('build-js', () => {
   // set up the browserify instance on a task basis
   const b = browserify({
     entries: './src/js/presenter.js',
@@ -48,6 +49,14 @@ gulp.task('build', () => {
     .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('build-css', () =>
+  gulp.src('./src/css/presentation.styl')
+    .pipe(sourcemaps.init())
+    .pipe(stylus())
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./dist/'))
+);
+
 gulp.task('webserver', () =>
   gulp.src('.')
     .pipe(server({
@@ -63,6 +72,6 @@ gulp.task('webserver', () =>
     }))
 );
 
-gulp.task('build-watch', () => gulp.watch('src/**/*', ['build']));
+gulp.task('build-watch', () => gulp.watch('src/**/*', ['build-js', 'build-css']));
 
 gulp.task('dev-server', ['build-watch', 'webserver']);
