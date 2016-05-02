@@ -1,3 +1,4 @@
+import jQuery from "jquery";
 
 const slideSelector = '.slide';
 const presentationSelector = '.presentation';
