@@ -1,49 +1,64 @@
 import $ from 'jquery';
+import keycode from 'keycode';
 
 const slideSelector = '.slide';
-const presentationSelector = '.presentation';
+const containerSelector = 'body';
 
-function presentSlide(slideToPresent) {
-  const $slideToPresent = $(slideToPresent);
-  const $allSlides = $slideToPresent
-    .parent(presentationSelector)
-    .find(slideSelector);
 
-  $allSlides.removeClass('presented');
-  $slideToPresent.addClass('presented');
+function presentSlide(nextSlide) {
+  const $nextSlide = $(nextSlide);
+  const $container = $nextSlide.closest(containerSelector);
+
+  const $currentSlides = $container.find('.presented');
+
+  $currentSlides.removeClass('presented');
+  $nextSlide.addClass('presented');
+  $container.addClass('presenting');
 }
 
-function presentNextSlide(currentSlide) {
-  const $currentSlide = $(currentSlide);
-  const $nextSlide = $currentSlide.nextAll(slideSelector).first();
+function switchSlide(target, nextOrPrev) {
+  const $container = $(target).closest(containerSelector);
+  const $currentSlide = $container.find('.presented');
+  const $nextSlide =
+    $currentSlide[nextOrPrev + 'All'](slideSelector).first();
   presentSlide($nextSlide);
 }
 
-function stopPresenting(currentSlide) {
-  const $allSlides = $(currentSlide)
-    .parent(presentationSelector)
-    .find(slideSelector);
+function stopPresenting(target) {
+  const $container = $(target).closest(containerSelector);
+  const $currentSlides = $container.find('.presented');
 
-  $allSlides.removeClass('presented');
+  $currentSlides.removeClass('presented');
+  $container.removeClass('presenting');
 }
 
 
 $(document).ready(() => {
   $(document).on(
-    'slidy:presentSlide click',
+    'click',
     slideSelector,
     function () { presentSlide(this); }
   );
 
   $(document).on(
-    'slidy:presentNextSlide click',
-    slideSelector + '.presented',
-    function () { presentNextSlide(this); }
-  );
-
-  $(document).on(
-    'slidy:stopPresenting dblclick',
-    slideSelector + '.presented',
-    function () { stopPresenting(this); }
+    'keydown',
+    '.presenting',
+    function (ev) {
+      switch (keycode(ev)) {
+        case 'right':
+        case 'space':
+          switchSlide(this, 'next');
+          break;
+        case 'left':
+          switchSlide(this, 'prev');
+          break;
+        case 'esc':
+          stopPresenting(this);
+          break;
+        default:
+          return true;
+      }
+      return false;
+    }
   );
 });

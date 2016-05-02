@@ -4,10 +4,14 @@
   margin: 0.25em;
 }
 
+.presenting {
+  overflow: hidden;
+}
+
 .slide.presented {
   border: none;
   margin: 0em;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;

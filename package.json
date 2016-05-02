@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "jquery": "^2.2.3",
+    "keycode": "^2.1.1",
     "milligram": "^1.1.0"
   }
 }

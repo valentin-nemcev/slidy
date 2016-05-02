@@ -37,7 +37,7 @@ gulp.task('build', () => {
   });
 
   return b.bundle()
-  .on('error', gutil.log)
+  .on('error', function (error) { gutil.log(error); this.emit('end'); })
 
     .pipe(source('presenter.js'))
     .pipe(buffer())
