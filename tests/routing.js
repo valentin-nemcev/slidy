@@ -123,3 +123,49 @@ describe('Present slide', function () {
     });
   });
 });
+
+
+describe('Stop presenting', function () {
+
+  context('when some existing slides are presented', function () {
+
+    beforeEach(function () {
+      this.$container = $('<div class="container"></div>');
+      this.$container.append('<div class="slide"/>');
+      this.$somethingElse = $('<div class="somethingElse"/>');
+      this.$container.append(this.$somethingElse);
+      this.$slide = $('<div class="slide"/>');
+      this.$container.append(this.$slide);
+      this.$container.append('<div class="slide"/>');
+
+      this.slidy = new Slidy({containerSelector: '.container'});
+
+      this.slidy.presentSlide(this.$slide);
+    });
+
+
+    specify('unset slide class', function () {
+      this.slidy.stopPresenting(this.$container);
+
+      expect(this.$container.find('.presented').get()).to.be.empty();
+    });
+
+
+    specify('triggers stop slideshow event on container', function () {
+      const handlerSpy = sinon.spy();
+      this.$container.on('slidy:stopSlideshow', handlerSpy);
+
+      this.slidy.stopPresenting(this.$container);
+
+      expect(handlerSpy).to.have.been.calledOnce();
+    });
+
+
+    specify('unsets container class', function () {
+      this.slidy.stopPresenting(this.$container);
+
+      expect(this.$container).to.have.not.$class('presenting');
+    });
+  });
+
+});

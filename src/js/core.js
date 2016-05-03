@@ -13,6 +13,10 @@ export default class Slidy {
     this.containerSelector = containerSelector || 'body';
   }
 
+  getPresentingContainer($context) {
+    return $context.find(this.containerSelector + '.presenting');
+  }
+
   presentSlide($nextSlideArg) {
     const $nextSlide = $nextSlideArg.filter('.slide').first();
     const $container = $nextSlide.closest(this.containerSelector);
@@ -24,5 +28,15 @@ export default class Slidy {
     $container.addClass('presenting');
 
     $container.trigger('slidy:startSlideshow');
+  }
+
+
+  stopPresenting($container) {
+    const $currentSlides = $container.find('.presented');
+
+    $currentSlides.removeClass('presented');
+    $container.removeClass('presenting');
+
+    $container.trigger('slidy:stopSlideshow');
   }
 }

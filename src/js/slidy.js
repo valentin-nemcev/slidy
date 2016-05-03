@@ -34,17 +34,10 @@ function switchSlide(target, nextOrPrev) {
   slidy.presentSlide($nextSlide);
 }
 
-function stopPresenting(target) {
-  const $container = $(target).closest(containerSelector);
-  const $currentSlides = $container.find('.presented');
-
-  $currentSlides.removeClass('presented');
-  $container.removeClass('presenting');
 
   // Remove hash from location
-  const loc = window.location;
-  window.history.pushState(null, null, loc.pathname + loc.search);
-}
+  // const loc = window.location;
+  // window.history.pushState(null, null, loc.pathname + loc.search);
 
 $(document).ready(() => {
   $(document).on(
@@ -66,7 +59,7 @@ $(document).ready(() => {
           switchSlide(this, 'prev');
           break;
         case 'esc':
-          stopPresenting(this);
+          slidy.stopPresenting($(this));
           break;
         default:
           return true;
@@ -81,7 +74,7 @@ $(document).ready(() => {
     if (path != null) {
       slidy.presentSlide(slideByPath(path));
     } else {
-      stopPresenting($('.presentation'));
+      slidy.stopPresenting(slidy.getPresentingContainer($()));
     }
   }).trigger('popstate');
 });
