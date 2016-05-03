@@ -1,6 +1,6 @@
-import {hashFromPath, pathFromHash} from '../src/js/core';
+import {hashFromPath, pathFromHash} from '../src/js/router';
 
-describe('Routing', function () {
+describe('Router', function () {
 
   specify('hash from path', function () {
     expect(hashFromPath(1)).to.equal('#slidy-1');
