@@ -13,7 +13,8 @@ export default class Slidy {
     this.containerSelector = containerSelector || 'body';
   }
 
-  presentSlide($nextSlide) {
+  presentSlide($nextSlideArg) {
+    const $nextSlide = $nextSlideArg.filter('.slide').first();
     const $container = $nextSlide.closest(this.containerSelector);
 
     const $currentSlides = $container.find('.presented');

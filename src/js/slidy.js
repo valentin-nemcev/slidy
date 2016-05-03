@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import keycode from 'keycode';
 
-import { hashFromPath, pathFromHash } from './core';
+import Slidy, {hashFromPath, pathFromHash} from './core';
 
 const slideSelector = '.slide';
 const containerSelector = 'body';
@@ -19,26 +19,19 @@ function slideByPath(path) {
   return $container.find(slideSelector).get(path);
 }
 
-function presentSlide(nextSlide) {
-  const $nextSlide = $(nextSlide);
-  const $container = $nextSlide.closest(containerSelector);
 
-  const $currentSlides = $container.find('.presented');
+//   window.history.pushState(null, null,
+//                            hashFromPath(slidePath($nextSlide)));
 
-  $currentSlides.removeClass('presented');
-  $nextSlide.addClass('presented');
-  $container.addClass('presenting');
 
-  window.history.pushState(null, null,
-                           hashFromPath(slidePath($nextSlide)));
-}
+const slidy = new Slidy({containerSelector: 'body'});
 
 function switchSlide(target, nextOrPrev) {
   const $container = $(target).closest(containerSelector);
   const $currentSlide = $container.find('.presented');
   const $nextSlide =
     $currentSlide[nextOrPrev + 'All'](slideSelector).first();
-  presentSlide($nextSlide);
+  slidy.presentSlide($nextSlide);
 }
 
 function stopPresenting(target) {
@@ -53,12 +46,11 @@ function stopPresenting(target) {
   window.history.pushState(null, null, loc.pathname + loc.search);
 }
 
-
 $(document).ready(() => {
   $(document).on(
     'click',
     slideSelector,
-    function () { presentSlide(this); }
+    function () { slidy.presentSlide($(this)); }
   );
 
   $(document).on(
@@ -87,7 +79,7 @@ $(document).ready(() => {
   $(window).on('popstate', () => {
     const path = pathFromHash(window.location.hash);
     if (path != null) {
-      presentSlide(slideByPath(path));
+      slidy.presentSlide(slideByPath(path));
     } else {
       stopPresenting($('.presentation'));
     }
