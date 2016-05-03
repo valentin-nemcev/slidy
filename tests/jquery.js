@@ -22,11 +22,11 @@ jQuery.fn.equals = function (compareTo) {
 };
 
 jQuery.fn.outerHTML = function () {
-  jQuery('<div/>').append(this.clone()).html();
+  return jQuery('<div/>').append(this.clone()).html();
 };
 
 jQuery.fn.inspect = function () {
-  return '$("' + this.selector + '")';
+  return '$("' + (this.selector || this.outerHTML()) + '")';
 };
 
 export default jQuery;
