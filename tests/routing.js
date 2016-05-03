@@ -60,7 +60,7 @@ describe('Present slide', function () {
       specify('sets container class', function () {
         this.slidy.presentSlide(this.$slide);
 
-        expect(this.$container).to.have.class('presenting');
+        expect(this.$container).to.have.$class('presenting');
       });
     });
 

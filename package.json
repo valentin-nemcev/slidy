@@ -24,7 +24,7 @@
     "babelify": "^7.3.0",
     "browserify": "^13.0.0",
     "chai": "^3.5.0",
-    "chai-jquery": "^2.0.0",
+    "chai-jq": "0.0.9",
     "dirty-chai": "^1.2.2",
     "eslint": "^2.9.0",
     "eslint-config-airbnb-base": "^2.0.0",

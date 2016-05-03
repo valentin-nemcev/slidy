@@ -1,22 +1,30 @@
 import chai from 'chai';
 
-global.expect = chai.expect;
 
 import sinon from 'sinon';
+
 global.sinon = sinon;
 
 import 'mocha-sinon';
 
-// chai.use(require('dirty-chai'));
 import sinonChai from 'sinon-chai';
 chai.use(sinonChai);
 
-import chaiJquery from 'chai-jquery';
+import chaiJQ from 'chai-jq';
+chai.use(chaiJQ);
+
+// import chaiJquery from 'chai-jquery';
 import $ from './jquery';
 
-chai.use(function (chai, utils) {
-  return chaiJquery(chai, utils, $);
-});
+$.prototype.inspect = function () {
+  return '$("' + this.selector + '")';
+};
+
+global.expect = chai.expect;
+
+// expect(true).to.be.true(); instead of expect(true).to.be.true;
+import dirtyChai from 'dirty-chai';
+chai.use(dirtyChai);
 
 
 // http://stackoverflow.com/questions/3176962/jquery-object-equality/3177083#3177083
