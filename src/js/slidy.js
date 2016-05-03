@@ -26,14 +26,6 @@ function slideByPath(path) {
 
 const slidy = new Slidy({containerSelector: 'body'});
 
-function switchSlide(target, nextOrPrev) {
-  const $container = $(target).closest(containerSelector);
-  const $currentSlide = $container.find('.presented');
-  const $nextSlide =
-    $currentSlide[nextOrPrev + 'All'](slideSelector).first();
-  slidy.presentSlide($nextSlide);
-}
-
 
   // Remove hash from location
   // const loc = window.location;
@@ -53,10 +45,10 @@ $(document).ready(() => {
       switch (keycode(ev)) {
         case 'right':
         case 'space':
-          switchSlide(this, 'next');
+          slidy.switchSlide($(this), 'next');
           break;
         case 'left':
-          switchSlide(this, 'prev');
+          slidy.switchSlide($(this), 'prev');
           break;
         case 'esc':
           slidy.stopPresenting($(this));
@@ -70,11 +62,12 @@ $(document).ready(() => {
 
 
   $(window).on('popstate', () => {
+    console.log(window.location.hash);
     const path = pathFromHash(window.location.hash);
     if (path != null) {
       slidy.presentSlide(slideByPath(path));
     } else {
-      slidy.stopPresenting(slidy.getPresentingContainer($()));
+      slidy.stopPresenting(slidy.findPresentingContainer($()));
     }
   }).trigger('popstate');
 });
