@@ -1,9 +1,23 @@
 import $ from 'jquery';
 import keycode from 'keycode';
 
+import { hashFromPath, pathFromHash } from './core';
+
 const slideSelector = '.slide';
 const containerSelector = 'body';
 
+function slidePath(slide) {
+  const $slide = $(slide);
+  const $container = $slide.closest(containerSelector);
+
+  return $container.find(slideSelector).index($slide);
+}
+
+function slideByPath(path) {
+  const $container = $(containerSelector).first();
+
+  return $container.find(slideSelector).get(path);
+}
 
 function presentSlide(nextSlide) {
   const $nextSlide = $(nextSlide);
@@ -15,7 +29,8 @@ function presentSlide(nextSlide) {
   $nextSlide.addClass('presented');
   $container.addClass('presenting');
 
-  window.history.pushState(null, null, '#slidy');
+  window.history.pushState(null, null,
+                           hashFromPath(slidePath($nextSlide)));
 }
 
 function switchSlide(target, nextOrPrev) {
@@ -70,8 +85,9 @@ $(document).ready(() => {
 
 
   $(window).on('popstate', () => {
-    if (window.location.hash === '#slidy') {
-      presentSlide($('.slide').first());
+    const path = pathFromHash(window.location.hash);
+    if (path != null) {
+      presentSlide(slideByPath(path));
     } else {
       stopPresenting($('.presentation'));
     }
