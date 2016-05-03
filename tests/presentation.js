@@ -105,6 +105,57 @@ describe('Present slide', function () {
       specifyDoesNothing();
     });
   });
+
+
+  context('when some existing slides are presented', function () {
+
+    beforeEach(function () {
+      this.$container = $('<div class="container"></div>');
+      this.$prevSlide = $('<div class="slide"/>');
+      this.$container.append(this.$prevSlide);
+      this.$container.append('<div class="slide"/>');
+      this.$somethingElse = $('<div class="somethingElse"/>');
+      this.$container.append(this.$somethingElse);
+      this.$slide = $('<div class="slide"/>');
+      this.$container.append(this.$slide);
+      this.$container.append('<div class="slide"/>');
+
+
+      this.slidy = new Slidy({containerSelector: '.container'});
+
+      this.slidy.presentSlide(this.$prevSlide);
+    });
+
+
+    context('and some slide is presented', function () {
+
+      specify('sets slide class', function () {
+        this.slidy.presentSlide(this.$slide);
+
+        expect(this.$container.find('.presented'))
+        .to.have.sameElements(this.$slide);
+      });
+
+
+      specify(
+        'does not trigger start slideshow event on container',
+        function () {
+          const handlerSpy = sinon.spy();
+          this.$container.on('slidy:startSlideshow', handlerSpy);
+
+          this.slidy.presentSlide(this.$slide);
+
+          expect(handlerSpy).to.have.not.been.called();
+        });
+
+
+      specify('sets container class', function () {
+        this.slidy.presentSlide(this.$slide);
+
+        expect(this.$container).to.have.$class('presenting');
+      });
+    });
+  });
 });
 
 
@@ -141,6 +192,25 @@ describe('Stop presenting', function () {
       this.slidy.stopPresenting(this.$container);
 
       expect(handlerSpy).to.have.been.calledOnce();
+    });
+
+
+    context('when no existing slides are presented', function () {
+
+      beforeEach(function () {
+        this.slidy.stopPresenting(this.$container);
+      });
+
+      specify(
+        'does not trigger stop slideshow event on container',
+        function () {
+          const handlerSpy = sinon.spy();
+          this.$container.on('slidy:stopSlideshow', handlerSpy);
+
+          this.slidy.stopPresenting(this.$container);
+
+          expect(handlerSpy).to.have.not.been.called();
+        });
     });
 
 

@@ -25,9 +25,11 @@ export default class Slidy {
 
     $currentSlides.removeClass('presented');
     $nextSlide.addClass('presented');
-    $container.addClass('presenting');
 
-    $container.trigger('slidy:startSlideshow');
+    if (!$container.hasClass('presenting')) {
+      $container.addClass('presenting');
+      $container.trigger('slidy:startSlideshow');
+    }
   }
 
 
@@ -43,8 +45,9 @@ export default class Slidy {
     const $currentSlides = $container.find('.presented');
 
     $currentSlides.removeClass('presented');
-    $container.removeClass('presenting');
-
-    $container.trigger('slidy:stopSlideshow');
+    if ($container.hasClass('presenting')) {
+      $container.removeClass('presenting');
+      $container.trigger('slidy:stopSlideshow');
+    }
   }
 }
