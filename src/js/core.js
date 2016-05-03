@@ -13,9 +13,6 @@ export default class Slidy {
     this.containerSelector = containerSelector || 'body';
   }
 
-  findPresentingContainer($context) {
-    return $context.find(this.containerSelector + '.presenting');
-  }
 
   presentSlide($nextSlideArg) {
     const $nextSlide = $nextSlideArg.filter('.slide').first();
@@ -29,6 +26,9 @@ export default class Slidy {
     if (!$container.hasClass('presenting')) {
       $container.addClass('presenting');
       $container.trigger('slidy:startSlideshow');
+    }
+    if (!$currentSlides.is($nextSlide)) {
+      $container.trigger('slidy:showSlide', [$nextSlide]);
     }
   }
 

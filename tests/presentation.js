@@ -40,6 +40,17 @@ describe('Present slide', function () {
       });
 
 
+      specify('triggers show slide event on container', function () {
+        const handlerSpy = sinon.spy();
+        this.$container.on('slidy:showSlide', handlerSpy);
+
+        this.slidy.presentSlide(this.$slide);
+
+        expect(handlerSpy).to.have.been.calledOnce();
+        expect(handlerSpy.args[0][1]).to.have.sameElements(this.$slide);
+      });
+
+
       specify('sets container class', function () {
         this.slidy.presentSlide(this.$slide);
 
@@ -149,10 +160,34 @@ describe('Present slide', function () {
         });
 
 
+      specify('triggers show slide event on container', function () {
+        const handlerSpy = sinon.spy();
+        this.$container.on('slidy:showSlide', handlerSpy);
+
+        this.slidy.presentSlide(this.$slide);
+
+        expect(handlerSpy).to.have.been.calledOnce();
+        expect(handlerSpy.args[0][1]).to.have.sameElements(this.$slide);
+      });
+
+
       specify('sets container class', function () {
         this.slidy.presentSlide(this.$slide);
 
         expect(this.$container).to.have.$class('presenting');
+      });
+    });
+
+
+    context('and some slide is presented', function () {
+
+      specify('does not trigger show slide event on container', function () {
+        const handlerSpy = sinon.spy();
+        this.$container.on('slidy:showSlide', handlerSpy);
+
+        this.slidy.presentSlide(this.$prevSlide);
+
+        expect(handlerSpy).to.have.not.been.called();
       });
     });
   });

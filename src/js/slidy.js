@@ -16,20 +16,12 @@ function slidePath(slide) {
 function slideByPath(path) {
   const $container = $(containerSelector).first();
 
-  return $container.find(slideSelector).get(path);
+  return $container.find(slideSelector).eq(path);
 }
-
-
-//   window.history.pushState(null, null,
-//                            hashFromPath(slidePath($nextSlide)));
 
 
 const slidy = new Slidy({containerSelector: 'body'});
 
-
-  // Remove hash from location
-  // const loc = window.location;
-  // window.history.pushState(null, null, loc.pathname + loc.search);
 
 $(document).ready(() => {
   $(document).on(
@@ -62,12 +54,22 @@ $(document).ready(() => {
 
 
   $(window).on('popstate', () => {
-    console.log(window.location.hash);
     const path = pathFromHash(window.location.hash);
     if (path != null) {
       slidy.presentSlide(slideByPath(path));
     } else {
-      slidy.stopPresenting(slidy.findPresentingContainer($()));
+      slidy.stopPresenting($('body'));
     }
   }).trigger('popstate');
+
+  $('body')
+    .on('slidy:showSlide', (ev, $slide) => {
+      window.history.pushState(null, null,
+                           hashFromPath(slidePath($slide)));
+    })
+    .on('slidy:stopSlideshow', () => {
+      // Remove hash from location
+      const loc = window.location;
+      window.history.pushState(null, null, loc.pathname + loc.search);
+    });
 });
