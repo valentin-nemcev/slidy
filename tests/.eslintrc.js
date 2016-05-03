@@ -1,9 +1,10 @@
-{
+module.exports = {
   "rules": {
     "padded-blocks": 0,
+    "prefer-arrow-callback": 0
   },
   "env": {
-    "mocha": true,
+    "mocha": true
   },
   "globals": {
     "expect": true,
@@ -11,4 +12,3 @@
     "sinon": true
   }
 }
-
