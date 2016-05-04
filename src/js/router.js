@@ -27,8 +27,12 @@ function slideByPath(path) {
 
 export default class SlidyRouter {
 
-  _setHash(hash) {
-    this.window.history.pushState(null, null, hash);
+  _setHash(hash, {replace = false}) {
+    if (replace) {
+      this.window.history.replaceState(null, null, hash);
+    } else {
+      this.window.history.pushState(null, null, hash);
+    }
   }
 
   _clearHash() {
@@ -36,12 +40,20 @@ export default class SlidyRouter {
     this.window.history.pushState(null, null, loc.pathname + loc.search);
   }
 
+  _getCurrentPath() {
+    return pathFromHash(this.window.location.hash);
+  }
+
   bindToScreen(screen) {
     this.screen = screen;
 
     this.screen.$screen
       .on('slidy:showSlide', (ev, $slide) =>
-        this._setHash(hashFromPath(slidePath($slide)))
+          this._setHash(
+            hashFromPath(slidePath($slide)),
+            // Slide transitions should not be in navigation history
+            {replace: this._getCurrentPath() != null}
+          )
       )
       .on('slidy:stopSlideshow', () => this._clearHash());
     return this;
@@ -50,7 +62,7 @@ export default class SlidyRouter {
   bindToWindow(window) {
     this.window = window;
     $(this.window).on('popstate', () => {
-      const path = pathFromHash(this.window.location.hash);
+      const path = this._getCurrentPath();
       if (path != null) {
         this.screen.showSlide(slideByPath(path));
       } else {
