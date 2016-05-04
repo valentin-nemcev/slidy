@@ -29,4 +29,19 @@ export default class SlidyDeck {
     const slideIndex = $presentation.find('.slide').index($slide || this.$());
     return slideIndex >= 0 ? slideIndex + 1 : null;
   }
+
+
+  getPrevSlide($slide) {
+    return this.getAdjacentSlide('prev', $slide);
+  }
+
+
+  getNextSlide($slide) {
+    return this.getAdjacentSlide('next', $slide);
+  }
+
+
+  getAdjacentSlide(nextOrPrev, $slide) {
+    return $slide[nextOrPrev + 'All']('.slide:first');
+  }
 }

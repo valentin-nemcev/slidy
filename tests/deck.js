@@ -26,8 +26,10 @@ describe('Deck', function () {
       </section>
     `);
 
+    this.$somethingElse = $('<div class="something-else"/>');
+
     this.$deck = $('<section class="presentation"/>')
-      .append(this.$slide1, this.$slide2, this.$slide3);
+      .append(this.$slide1, this.$slide2, this.$somethingElse, this.$slide3);
 
     this.deck = new SlidyDeck({$context: this.$deck});
   });
@@ -53,6 +55,7 @@ describe('Deck', function () {
     });
   });
 
+
   describe('getPathBySlide', function () {
     specify('returns path', function () {
       expect(this.deck.getPathBySlide(this.$slide1)).to.equal(1);
@@ -66,6 +69,27 @@ describe('Deck', function () {
         .to.be.null();
       expect(this.deck.getPathBySlide(this.$somethingElse)).to.be.null();
       expect(this.deck.getPathBySlide($())).to.be.null();
+    });
+  });
+
+
+  describe('getNextSlide, getPrevSlide', function () {
+
+    specify('return adjacent slide', function () {
+      expect(this.deck.getPrevSlide(this.$slide1).get())
+        .to.be.empty();
+      expect(this.deck.getNextSlide(this.$slide1))
+        .to.have.sameElements(this.$slide2);
+
+      expect(this.deck.getPrevSlide(this.$slide2))
+        .to.have.sameElements(this.$slide1);
+      expect(this.deck.getNextSlide(this.$slide2))
+        .to.have.sameElements(this.$slide3);
+
+      expect(this.deck.getPrevSlide(this.$slide3))
+        .to.have.sameElements(this.$slide2);
+      expect(this.deck.getNextSlide(this.$slide3).get())
+        .to.be.empty();
     });
   });
 });

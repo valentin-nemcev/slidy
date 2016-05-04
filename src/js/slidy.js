@@ -27,10 +27,12 @@ $(document).ready(() => {
       switch (keycode(ev)) {
         case 'right':
         case 'space':
-          screen.switchSlide('next');
+          screen.showSlide(deck.getNextSlide(screen.getCurrentSlide()));
+          // screen.switchSlide('next');
           break;
         case 'left':
-          screen.switchSlide('prev');
+          screen.showSlide(deck.getPrevSlide(screen.getCurrentSlide()));
+          // screen.switchSlide('prev');
           break;
         case 'esc':
           screen.stopPresenting();

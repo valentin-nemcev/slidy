@@ -99,15 +99,6 @@ describe('Present slide', function () {
     });
 
 
-    context('and something other than a slide is presented', function () {
-      beforeEach(function () {
-        this.$slide = this.$somethingElse;
-      });
-
-      specifyDoesNothing();
-    });
-
-
     context('and empty object is presented', function () {
       beforeEach(function () {
         this.$slide = $();

@@ -7,7 +7,7 @@ export default class SlidyScreen {
 
   showSlide($nextSlideArg) {
     const $nextSlide =
-      this.$screen.find($nextSlideArg).first().filter('.slide');
+      this.$screen.find($nextSlideArg).first();
 
     const $currentSlides = this.$screen.find('.presented');
 
@@ -26,11 +26,8 @@ export default class SlidyScreen {
   }
 
 
-  switchSlide(nextOrPrev) {
-    const $currentSlide = this.$screen.find('.presented');
-    const $nextSlide =
-      $currentSlide[nextOrPrev + 'All']('.slide').first();
-    this.showSlide($nextSlide);
+  getCurrentSlide() {
+    return this.$screen.find('.presented').first();
   }
 
 
