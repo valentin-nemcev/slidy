@@ -9,7 +9,7 @@ normalize()
 
 // Layout
 
-$slide-spacing = 0.5rem
+$slide-spacing = 1rem
 $slide-aspect-ratio = (4/3)
 
 .presentation
@@ -25,24 +25,33 @@ $slide-aspect-ratio = (4/3)
   padding: 1.25em (1.25em * $slide-aspect-ratio)
 
   &:not(.presented)
-    border: 1px solid alpha(#000, 0.125)
+    font-size: 50%
+
     display: inline-block
+
     width: 15rem
     height: (@width / $slide-aspect-ratio)
     margin-bottom: $slide-spacing
     margin-right: $slide-spacing
-    font-size: 50%
 
+    border: 1px solid alpha(#000, 0.125)
+
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow: 0px 0px ($slide-spacing) ($slide-spacing/4) alpha(#000, 0.125)
 
+    cursor: pointer;
+
   &.presented
-    border: none
-    margin: 0em
+
     position: fixed
+
     left: 0
     top: 0
     width: 100%
     height: 100%
+    margin: 0em
+
+    border: none
     background: white
 
 

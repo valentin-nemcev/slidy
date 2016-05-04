@@ -4,6 +4,7 @@ import keycode from 'keycode';
 import SlidyScreen from './screen';
 import SlidyRouter from './router';
 import SlidyDeck from './deck';
+import clearSelection from './clearSelection';
 
 
 $(document).ready(() => {
@@ -17,7 +18,11 @@ $(document).ready(() => {
   $(document).on(
     'click',
     '.slide',
-    function () { screen.showSlide($(this)); }
+    function (ev) {
+      screen.showSlide($(this));
+      ev.preventDefault();
+      clearSelection();
+    }
   );
 
   $(document).on(
@@ -28,11 +33,9 @@ $(document).ready(() => {
         case 'right':
         case 'space':
           screen.showSlide(deck.getNextSlide(screen.getCurrentSlide()));
-          // screen.switchSlide('next');
           break;
         case 'left':
           screen.showSlide(deck.getPrevSlide(screen.getCurrentSlide()));
-          // screen.switchSlide('prev');
           break;
         case 'esc':
           screen.stopPresenting();
