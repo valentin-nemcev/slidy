@@ -35,32 +35,88 @@
     <section class="presentation">
       <section class="slide">
         <h1>Slidy</h1>
-        <p>Web framework for authoring and showing presentations</p>
-        <p>Made by <a href="mailto:mail@valentin-nemcev.com">Valentin Nemcev</a>
+        <p class="large">Web framework for authoring and showing presentations</p>
+        <p class="small">Press <kbd>→</kbd> or <kbd>Space</kbd> to go to next slide</p>
+        <p class="small">Made by <a href="mailto:mail@valentin-nemcev.com">Valentin Nemcev</a>
           while applying for a job at <a href="http://yandex.com">Yandex</a>
       </section>
       <section class="slide">
         <h2>How it works</h2>
-        <p>Use HTML to write your presentation</p>
-        <p>Use browser to review and present</p>
-        <p>Focus on content, not presentation ;)</p>
+        <ol class="large">
+          <li>Use HTML to write your presentation</li>
+          <li>Use browser to review and present</li>
+          <li>Focus on content, not presentation ;)</li>
+        </ol>
       </section>
       <section class="slide">
-        <h2>Deck view — slide sorter</h2>
-        <p>All slides at a glance</p>
+        <h2>For web developers, by web developer</h2>
+        image
+      </section>
+      <section class="slide">
+        <h2>How to use it</h2>
+        <ol>
+          <li>Download presentation template</li>
+          <li>Open index.html in your favourite HTML editor</li>
+          <li>Use provided examples and comments as a reference</li>
+          <li>Optionaly setup browser auto-refresh<br/>
+            <small><a href="https://github.com/tapio/live-server">Live Server</a>
+              for Node.js is a good choice</small>
+          </li>
+        </ol>
+      </section>
+      <section class="slide">
+        <h2>Keyboard controls</h2>
+        <p>Should work with remote presenters</p>
+        <p class="large"><kbd>→</kbd>, <kbd>Space</kbd> to go to next slide</p>
+        <p class="large"><kbd>←</kbd> to go to previous slide</p>
+        <p class="large"><kbd>Esc</kbd> to go back to slide sorter</p>
+      </section>
+      <section class="slide">
+        <h2>Slide sorter view</h2>
+        <p class="large">All slides at a glance</p>
         <p>Use for quick review or to pick specific slide</p>
       </section>
       <section class="slide">
-        <h2>Slide show — keyboard controls</h2>
-        <p>Control with keyboard</p>
-        <ul>
-          <li><kbd>→</kbd>, <kbd>Space</kbd> to go to next slide</li>
-          <li><kbd>←</kbd> to go to previous slide</li>
-          <li><kbd>Esc</kbd> to stop slide show</li>
-        </ul>
+        <h2>Well-behaved urls</h2>
+        <p>Each slide has its own fragment identifier</p>
+        <ol>
+          <li>
+            Each slide is directly linkable<br>
+            <span class="small">
+              Link to <a href="#slidy-4">previous slide</a>
+            </span>
+          </li>
+          <li>Position is preserved throught browser refresh</li>
+          <li>Back button brings back slide sorter, not previous
+            slide</li>
+        </ol>
       </section>
       <section class="slide">
-        <h1>Design goals</h1>
+        <h2>Adaptive aspect ratio</h2>
+        <p>Slides always fit the screen</p>
+        <p>Encourage focus on content instead of complex layout</p>
+        <p>Fix problems with overflow</p>
+      </section>
+      <section class="slide">
+        <h2>Responsive styles</h2>
+      </section>
+      <section class="slide">
+        <h2>Todo markup</h2>
+      </section>
+      <section class="slide">
+        <h2>Mouse navigation</h2>
+      </section>
+      <section class="slide">
+        <h2>Full screen</h2>
+      </section>
+      <section class="slide">
+        <h2>Touch support</h2>
+      </section>
+      <section class="slide">
+        <h2>Slide numbers</h2>
+      </section>
+      <section class="slide">
+        <h1>Structure (out of scope)</h1>
         <ul>
           <li>
             Use nested list to structure presentations
@@ -73,15 +129,8 @@
               <li>(Sub-list item)</li>
             </ol>
           </li>
-          <li>Have an outline view based on nested list structure</li>
-          <li>Perfect UI</li>
-          <li>Have a “slide sorter” view, when multiple slides are displayed on
-            one screen</li>
-          <li>Write presentation as HTML or some other templating language,
-            have live preview in browser, have an opinionated set of CSS and JS
-            defaults, extend it only in special circumstances,
-            start with a template/reference project</li>
-          <li>No presenter view</li>
+      </section>
+      <section class="slide">
           <li>Bonus goal: produce handouts and presenter notes ready for
             printing</li>
         </ul>

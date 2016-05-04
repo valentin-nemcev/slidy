@@ -9,24 +9,31 @@ normalize()
 
 // Layout
 
+$slide-spacing = 0.5rem
+$slide-aspect-ratio = (4/3)
+
 .presentation
+  font-size: 1.125em
   display: flex
   flex-wrap: wrap
-  justify-content: space-between
-  padding-top: 0.25rem
-  margin: 0 0.25rem
+  justify-content: flex-start
+  padding-top: $slide-spacing
+  padding-left: $slide-spacing
 
 
 .slide
-  padding: 1em
+  padding: 1.25em (1.25em * $slide-aspect-ratio)
 
   &:not(.presented)
-    border: 1px solid gray
+    border: 1px solid alpha(#000, 0.125)
     display: inline-block
-    width: calc(25% - 0.25rem)
-    margin-bottom: 0.25rem
-    height: (25 / (4/3)) vw
+    width: 15rem
+    height: (@width / $slide-aspect-ratio)
+    margin-bottom: $slide-spacing
+    margin-right: $slide-spacing
     font-size: 50%
+
+    box-shadow: 0px 0px ($slide-spacing) ($slide-spacing/4) alpha(#000, 0.125)
 
   &.presented
     border: none
@@ -37,6 +44,7 @@ normalize()
     width: 100%
     height: 100%
     background: white
+
 
 .presenting
   font-size: 200%
@@ -59,14 +67,14 @@ base()
 // scale itself
 
 
-$h3-font-size = 1em
+$h3-font-size = 1.3em
 
 -heading($level)
   font-size: modular-scale($h3-font-size, 3 - $level)
   text-rendering: optimizelegibility
   font-weight: bold
-  text-margin()
-  -line-height()
+  margin: 0.125em 0
+  line-height: 1.4
 
 
 h1
@@ -87,6 +95,11 @@ h5
 h6
   -heading(6)
 
+.large
+  font-size: 125%
+
+small, .small
+  font-size: 75%
 
 a
   color: blue
@@ -101,6 +114,28 @@ a
 p, li
   paragraph(1em)
 
+li
+  ol, ul
+    margin-left: 2em
+
+ol
+  list-style-position: outside
+  padding-left: 0
+
+  & > li
+    margin-left: 1.25em;
+    text-indent: 0;
+
+ul
+  list-style: none;
+  padding-left: 0;
+
+  & > li
+    padding-left: 1.25em;
+    text-indent: -1.25em;
+
+    &:before
+      content: "— ";
 
 
 kbd
