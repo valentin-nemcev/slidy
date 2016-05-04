@@ -3,13 +3,14 @@ import keycode from 'keycode';
 
 import SlidyScreen from './screen';
 import SlidyRouter from './router';
+import SlidyDeck from './deck';
 
 
 $(document).ready(() => {
   const screen = new SlidyScreen({$screen: $(document.body)});
+  const deck = new SlidyDeck({$context: $(document)});
 
-  const router = new SlidyRouter();
-  router
+  new SlidyRouter({deck})
     .bindToScreen(screen)
     .bindToWindow(window);
 

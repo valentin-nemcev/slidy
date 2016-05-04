@@ -6,6 +6,7 @@ module.exports = {
       "no-shadow": 0,
       "prefer-template": 0,
       "no-underscore-dangle": 0,
+      "no-else-return": 0,
       "object-curly-spacing": ["error", "never"],
     }
 };

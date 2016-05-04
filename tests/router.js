@@ -1,18 +1,24 @@
-import {hashFromPath, pathFromHash} from '../src/js/router';
+import SlidyRouter from '../src/js/router';
 
 describe('Router', function () {
 
-  specify('hash from path', function () {
-    expect(hashFromPath(1)).to.equal('#slidy-1');
+  beforeEach(function () {
+    this.router = new SlidyRouter({deck: null});
   });
 
-  specify('path from hash', function () {
-    expect(pathFromHash('#slidy-1')).to.equal(1);
 
-    expect(pathFromHash('#slidy')).to.equal(null);
-    expect(pathFromHash('#slidy-nan')).to.equal(null);
-    expect(pathFromHash('')).to.equal(null);
-    expect(pathFromHash('something else')).to.equal(null);
+  specify('hash from path', function () {
+    expect(this.router._hashFromPath(1)).to.equal('#slidy-1');
+  });
+
+
+  specify('path from hash', function () {
+    expect(this.router._pathFromHash('#slidy-1')).to.equal(1);
+
+    expect(this.router._pathFromHash('#slidy')).to.equal(null);
+    expect(this.router._pathFromHash('#slidy-nan')).to.equal(null);
+    expect(this.router._pathFromHash('')).to.equal(null);
+    expect(this.router._pathFromHash('something else')).to.equal(null);
   });
 });
 

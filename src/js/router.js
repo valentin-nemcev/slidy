@@ -1,29 +1,5 @@
-export function hashFromPath(path) {
-  return '#slidy-' + path;
-}
-
-export function pathFromHash(hash) {
-  const match = hash.match(/^#slidy-(\d+)$/i);
-  return match && parseInt(match[1], 10);
-}
-
 import $ from 'jquery';
 
-const slideSelector = '.slide';
-const containerSelector = 'body';
-
-function slidePath(slide) {
-  const $slide = $(slide);
-  const $container = $slide.closest(containerSelector);
-
-  return $container.find(slideSelector).index($slide);
-}
-
-function slideByPath(path) {
-  const $container = $(containerSelector).first();
-
-  return $container.find(slideSelector).eq(path);
-}
 
 export default class SlidyRouter {
 
@@ -41,7 +17,21 @@ export default class SlidyRouter {
   }
 
   _getCurrentPath() {
-    return pathFromHash(this.window.location.hash);
+    return this._pathFromHash(this.window.location.hash);
+  }
+
+  _hashFromPath(path) {
+    return '#slidy-' + path;
+  }
+
+  _pathFromHash(hash) {
+    const match = hash.match(/^#slidy-(\d+)$/i);
+    return match && parseInt(match[1], 10);
+  }
+
+
+  constructor({deck}) {
+    this.deck = deck;
   }
 
   bindToScreen(screen) {
@@ -50,7 +40,7 @@ export default class SlidyRouter {
     this.screen.$screen
       .on('slidy:showSlide', (ev, $slide) =>
           this._setHash(
-            hashFromPath(slidePath($slide)),
+            this._hashFromPath(this.deck.getPathBySlide($slide)),
             // Slide transitions should not be in navigation history
             {replace: this._getCurrentPath() != null}
           )
@@ -64,7 +54,7 @@ export default class SlidyRouter {
     $(this.window).on('popstate', () => {
       const path = this._getCurrentPath();
       if (path != null) {
-        this.screen.showSlide(slideByPath(path));
+        this.screen.showSlide(this.deck.getSlideByPath(path));
       } else {
         this.screen.stopPresenting();
       }
