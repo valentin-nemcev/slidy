@@ -5,12 +5,14 @@ export default class SlidyDeck {
     this.$ = $context.constructor;
   }
 
+
   _getFirstPresentation() {
     return this.$context
       .find('.presentation')
       .addBack('.presentation')
       .first();
   }
+
 
   getSlideByPath(path) {
     const $presentation = this._getFirstPresentation();
@@ -22,6 +24,7 @@ export default class SlidyDeck {
       return this.$();
     }
   }
+
 
   getPathBySlide($slide) {
     const $presentation = this._getFirstPresentation();

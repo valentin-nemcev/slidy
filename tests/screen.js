@@ -58,6 +58,7 @@ describe('Present slide', function () {
       });
     });
 
+
     context('and multiple slides are presented', function () {
 
       specify('sets slide class only for first slide', function () {
@@ -78,6 +79,7 @@ describe('Present slide', function () {
 
         expect($before).to.have.sameOuterHTML(this.$screen);
       });
+
 
       specify('does not trigger start slideshow event on screen', function () {
         const handlerSpy = sinon.spy();
