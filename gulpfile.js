@@ -41,7 +41,7 @@ gulp.task('build-js', () => {
 
     .pipe(source('slidy.js'))
     .pipe(buffer())
-    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(sourcemaps.init({loadMaps: true}))
     // Add transformation tasks to the pipeline here.
     // .pipe(uglify())
     .pipe(sourcemaps.write('./'))
@@ -59,12 +59,13 @@ gulp.task('build-css', () =>
 
 gulp.task('build-html', () =>
   gulp.src('./content/*.html')
-    .pipe(copy('./dist/', { prefix: 1 }))
+    .pipe(copy('./dist/', {prefix: 1}))
 );
 
 gulp.task('webserver', () =>
   gulp.src('dist')
     .pipe(server({
+      host: '0.0.0.0', // !!! Open to whole network !!!
       livereload: true,
       directoryListing: false,
       // open: true

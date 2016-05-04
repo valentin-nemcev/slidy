@@ -9,8 +9,13 @@ normalize()
 
 // Layout
 
+html, body
+  height: 100%
+
 $slide-spacing = 1rem
 $slide-aspect-ratio = (4/3)
+$slides-in-row = 4
+$slide-padding = 12% // Both sides
 
 .presentation
   font-size: 1.125em
@@ -20,17 +25,31 @@ $slide-aspect-ratio = (4/3)
   padding-top: $slide-spacing
   padding-left: $slide-spacing
 
+  height: 100%
 
 .slide
-  padding: 1.25em (1.25em * $slide-aspect-ratio)
+
+  // Adaptive padding
+  &:not(.presented)
+    padding: 0 ($slide-padding / $slides-in-row / 2);
+  &.presented
+    padding: 0 ($slide-padding / 2);
+  &::before, &::after
+    display: block;
+    content: "";
+    height: ($slide-padding / 2);
+
 
   &:not(.presented)
     font-size: 50%
 
     display: inline-block
 
-    width: 15rem
-    height: (@width / $slide-aspect-ratio)
+    width: "calc(%s - %s)" % \
+      ((100 / $slides-in-row)% $slide-spacing)
+    height: "calc(%s - %s)" % \
+      ((100 / $slides-in-row)% ($slide-spacing))
+    // min-height: 25%
     margin-bottom: $slide-spacing
     margin-right: $slide-spacing
 
@@ -42,6 +61,10 @@ $slide-aspect-ratio = (4/3)
     cursor: pointer;
 
     overflow: auto;
+
+    // Fix spacing between inline blocks
+    .ie9 &
+      margin-left: -0.5em
 
   &.presented
 
