@@ -26,6 +26,10 @@ export default class SlidyScreen {
   }
 
 
+  isPresenting() {
+    return this.$screen.hasClass('presenting');
+  }
+
   getCurrentSlide() {
     return this.$screen.find('.presented').first();
   }

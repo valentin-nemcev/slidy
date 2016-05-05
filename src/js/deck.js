@@ -6,11 +6,6 @@ export default class SlidyDeck {
   }
 
 
-  getOptionsForSlide($slide) {
-    return $slide.closest('.presentation').data();
-  }
-
-
   _getFirstPresentation() {
     return this.$context
       .find('.presentation')
