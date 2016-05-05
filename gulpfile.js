@@ -5,19 +5,19 @@ const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const browserify = require('browserify');
 const babelify = require('babelify');
-
 const uglify = require('gulp-uglify');
-
 require('gulp-watch');
 const server = require('gulp-server-livereload');
 const eslint = require('gulp-eslint');
 const stylus = require('gulp-stylus');
 const copy = require('gulp-copy');
+const del = require('del');
+const shell = require('gulp-shell');
 
 gulp.task('lint', () =>
   // Be sure to return the stream from the task;
   // Otherwise, the task may end before the stream has finished.
-  gulp.src(['src/**/*.js'])
+  gulp.src(['{src,tests}/**/*.js'])
     // eslint() attaches the lint output to the "eslint" property
     // of the file object so it can be used by other modules.
     .pipe(eslint())
@@ -75,6 +75,17 @@ gulp.task('webserver', () =>
 );
 
 gulp.task('build', ['build-js', 'build-css', 'build-html']);
+
+gulp.task('clean', () => del(['dist/**/*']));
+
+gulp.task('zip', ['build'], shell.task([
+  'zip dist/slidy.zip dist/index.html dist/slidy.js dist/slidy.css',
+]));
+
+gulp.task('gh-pages', ['clean', 'zip'], shell.task([
+  // https://gist.github.com/cobyism/4730490
+  'git subtree push --prefix dist github gh-pages',
+]));
 
 
 gulp.task(
