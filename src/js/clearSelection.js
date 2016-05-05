@@ -1,5 +1,8 @@
-// http://upshots.org/javascript/javascript-cross-browser-clear-selection
 
+/**
+ * Clear selected text, should work in every browser.
+ * Source: http://upshots.org/javascript/javascript-cross-browser-clear-selection
+ */
 export default function clearSelection() {
   let selection;
   if (window.getSelection) selection = window.getSelection();

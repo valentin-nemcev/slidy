@@ -1,23 +1,27 @@
 import $ from 'jquery';
 
 
+/**
+ * Handles URLs.
+ * Syncronizes document hash fragment and SlidyScreen state
+ */
 export default class SlidyRouter {
 
   _setHash(hash, {replace = false}) {
     if (replace) {
-      this.window.history.replaceState(null, null, hash);
+      this._window.history.replaceState(null, null, hash);
     } else {
-      this.window.history.pushState(null, null, hash);
+      this._window.history.pushState(null, null, hash);
     }
   }
 
   _clearHash() {
-    const loc = this.window.location;
-    this.window.history.pushState(null, null, loc.pathname + loc.search);
+    const loc = this._window.location;
+    this._window.history.pushState(null, null, loc.pathname + loc.search);
   }
 
   _getCurrentPath() {
-    return this._pathFromHash(this.window.location.hash);
+    return this._pathFromHash(this._window.location.hash);
   }
 
   _hashFromPath(path) {
@@ -30,35 +34,46 @@ export default class SlidyRouter {
   }
 
 
+  /**
+   * @param {object} options
+   * @param {SlidyDeck} options.deck
+   */
   constructor({deck}) {
-    this.deck = deck;
+    this._deck = deck;
   }
 
-  bindToScreen(screen) {
-    this.screen = screen;
+  /**
+   * Listen to presentation state change events and update window URL and vice
+   * versa
+   * Both {@link bindToScreen} and {@link bindToWindow} should be called for
+   * this object to work correctly
+   * @param {SlidyScreen} screen
+   * @param {window} window
+   * @return {this}
+   */
+  bindToScreenAndWindow(screen, window) {
+    this._screen = screen;
 
-    this.screen.$screen
+    this._screen.$screen
       .on('slidy:showSlide', (ev, $slide) =>
           this._setHash(
-            this._hashFromPath(this.deck.getPathBySlide($slide)),
+            this._hashFromPath(this._deck.getPathBySlide($slide)),
             // Slide transitions should not be in navigation history
             {replace: this._getCurrentPath() != null}
           )
       )
       .on('slidy:stopSlideshow', () => this._clearHash());
-    return this;
-  }
 
-  bindToWindow(window) {
-    this.window = window;
-    $(this.window).on('popstate', () => {
+    this._window = window;
+    $(this._window).on('popstate', () => {
       const path = this._getCurrentPath();
       if (path != null) {
-        this.screen.showSlide(this.deck.getSlideByPath(path));
+        this._screen.showSlide(this._deck.getSlideByPath(path));
       } else {
-        this.screen.stopPresenting();
+        this._screen.stopPresenting();
       }
     }).trigger('popstate');
     return this;
   }
+
 }

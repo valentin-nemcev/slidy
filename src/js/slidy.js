@@ -32,11 +32,10 @@ function slidy($context) {
   const controls = getControlSettings($context);
 
   new SlidyRouter({deck})
-    .bindToScreen(screen)
-    .bindToWindow(window);
+    .bindToScreenAndWindow(screen, window);
 
   const ui = new SlidyUI({deck, screen})
-    .bindDeckUI($context)
+    .bindDeckUI()
     .bindSlideUI();
 
   if (controls.keyboard) ui.bindKeyboardUI();

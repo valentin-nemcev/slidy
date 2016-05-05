@@ -26,6 +26,7 @@
     "chai": "^3.5.0",
     "chai-jq": "0.0.9",
     "dirty-chai": "^1.2.2",
+    "esdoc": "^0.4.7",
     "eslint": "^2.9.0",
     "eslint-config-airbnb-base": "^2.0.0",
     "eslint-plugin-import": "^1.6.1",

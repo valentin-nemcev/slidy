@@ -1,7 +1,21 @@
+/** Handles deck, which is represented as DOM tree, see reference presentation
+ * HTML for structure. Does not have any state.
+ */
 export default class SlidyDeck {
 
+  /**
+   * @param {object} options
+   * @param {jQuery} options.$context Where to look for slides
+   */
   constructor({$context}) {
+    /**
+    * Where to look for slides
+    */
     this.$context = $context;
+
+    /**
+    * @private
+    */
     this.$ = $context.constructor;
   }
 
@@ -14,6 +28,12 @@ export default class SlidyDeck {
   }
 
 
+  /**
+   * @param {number} path 1-based slide index in deck. In future paths could be
+   * more complex than just numbers, (for example, in order to support multiple
+   * decks)
+   * @return {jQuery} Slide element or empty object of no slide was found
+   */
   getSlideByPath(path) {
     const $presentation = this._getFirstPresentation();
 
@@ -26,6 +46,11 @@ export default class SlidyDeck {
   }
 
 
+  /**
+   * @param {jQuery} $slide Slide element
+   * @return {?number} Slide path, see {@link getSlideByPath} for description.
+   * null when $slide is not a presentation slide
+   */
   getPathBySlide($slide) {
     const $presentation = this._getFirstPresentation();
 
@@ -34,17 +59,27 @@ export default class SlidyDeck {
   }
 
 
+  /**
+   * @param {jQuery} $slide Slide element
+   * @return {jQuery} Previous slide in deck or empty object if $slide is a
+   * last first
+   */
   getPrevSlide($slide) {
-    return this.getAdjacentSlide('prev', $slide);
+    return this._getAdjacentSlide('prev', $slide);
   }
 
 
+  /**
+   * @param {jQuery} $slide Slide element
+   * @return {jQuery} Next slide in deck or empty object if $slide is a
+   * last slide
+   */
   getNextSlide($slide) {
-    return this.getAdjacentSlide('next', $slide);
+    return this._getAdjacentSlide('next', $slide);
   }
 
 
-  getAdjacentSlide(nextOrPrev, $slide) {
+  _getAdjacentSlide(nextOrPrev, $slide) {
     return $slide[nextOrPrev + 'All']('.slide:first');
   }
 }
