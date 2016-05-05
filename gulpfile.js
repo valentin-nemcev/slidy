@@ -84,6 +84,7 @@ gulp.task('zip', ['build'], shell.task([
 
 gulp.task('gh-pages', ['clean', 'zip'], shell.task([
   // https://gist.github.com/cobyism/4730490
+  'git commit -m "Publish to gh-pages" dist',
   'git subtree push --prefix dist github gh-pages',
 ]));
 
