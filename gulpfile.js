@@ -60,7 +60,7 @@ gulp.task('build-css', () =>
 );
 
 gulp.task('build-html', () =>
-  gulp.src('./content/*.html')
+  gulp.src('./content/**/*')
     .pipe(copy('./dist/', {prefix: 1}))
 );
 

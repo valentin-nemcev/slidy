@@ -34,7 +34,7 @@ for i in 1..6
 
 
       &:not(.presented)
-        font-size: ($slide-font-size / $slides-in-row)
+        font-size: ($slide-font-size / $slides-in-row * 0.875)
 
         display: inline-block
 
@@ -95,7 +95,6 @@ for i in 1..6
 
 
 .presenting
-  font-size: 200%
   overflow: hidden
 
 
@@ -161,6 +160,7 @@ a
 
 p, li
   paragraph(1em)
+  line-height: 1.2
 
 li
   ol, ul
@@ -185,6 +185,9 @@ ul
     &:before
       content: "— ";
 
+.right
+  float: right
+  width: 33%
 
 kbd
   code: black
