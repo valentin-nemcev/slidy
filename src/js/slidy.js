@@ -9,12 +9,13 @@ import clearSelection from './clearSelection';
 // For IE9
 import 'html5-history-api';
 
-// No / after # in url
+// No / after # in url in IE9
 window.history.setup(null, '');
 
 import jQueryMousewheel from 'jquery-mousewheel';
 import throttle from 'throttle-debounce/throttle';
 
+import Hammer from 'hammerjs';
 
 $(document).ready(() => {
   const screen = new SlidyScreen({$screen: $(document.body)});
@@ -26,10 +27,12 @@ $(document).ready(() => {
 
   $(document).on(
     'click',
-    '.slide',
+    '.slide:not(.presented)',
     function (ev) {
-      screen.showSlide($(this));
-      ev.preventDefault();
+      if (!screen.$screen.hasClass('presenting')) {
+        screen.showSlide($(this));
+        ev.preventDefault();
+      }
     }
   );
 
@@ -91,4 +94,31 @@ $(document).ready(() => {
       }
     })
   );
+
+
+  const hammer = new Hammer(document.body);
+
+  hammer.on('swiperight', () => {
+    if (screen.$screen.hasClass('presenting')) {
+      screen.showSlide(deck.getPrevSlide(screen.getCurrentSlide()));
+      return false;
+    }
+    return true;
+  });
+  hammer.on('swipeleft', () => {
+    if (screen.$screen.hasClass('presenting')) {
+      screen.showSlide(deck.getNextSlide(screen.getCurrentSlide()));
+      return false;
+    }
+    return true;
+  });
+
+  hammer.get('pinch').set({enable: true});
+  hammer.on('pinchout', () => {
+    if (screen.$screen.hasClass('presenting')) {
+      screen.stopPresenting();
+      return false;
+    }
+    return true;
+  });
 });
