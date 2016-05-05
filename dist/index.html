@@ -1,0 +1,183 @@
+<!doctype html>
+<!--[if IE 9]>       <html class="ie9" lang="en"> <![endif]-->
+<!--[if !IE 9]><!--> <html class=""    lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Slidy sample presentation</title>
+    <link href="slidy.css" rel="stylesheet">
+    <script src="slidy.js"></script>
+  </head>
+
+  <!-- Disable or enable available control methods. Auto for touch means try
+  to detect touch device -->
+  <body class="slidy"
+    data-controls='{"keyboard": true, "touch": "auto", "scroll": true}'>
+
+    <!--[if lt IE 9]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML_sections_and_outlines#The_HTML5_outline_algorithm -->
+    <div style="display: none">
+      <!-- Document structure reference -->
+      <section>
+        <h1>Forest elephants</h1> 
+        <section>
+          <h1>Introduction</h1>
+          <p>In this section, we discuss the lesser known forest elephants.</p>
+        </section>
+        <section>
+          <h1>Habitat</h1>
+          <p>Forest elephants do not live in trees but among them.</p>
+        </section>
+        <aside>
+          <p>advertising block</p>
+        </aside>
+      </section>
+      <footer>
+        <p>(c) 2010 The Example company</p>
+      </footer>
+    </div>
+
+    <!-- https://github.com/h5o/h5o-js -->
+
+
+    <section class="presentation" data-scroll-control="true">
+      <section class="slide">
+        <h1>Slidy</h1>
+        <p class="large">Web framework for authoring and showing presentations</p>
+        <p class="small">Press <kbd>→</kbd> or <strong>scroll down</strong>
+          or <strong>swipe left</strong> to go to next slide</p>
+        <p class="small">Made by
+          <a href="https://github.com/valentin-nemcev">Valentin Nemcev</a>
+          while applying for a job at <a href="https://yandex.com/jobs/">Yandex</a>
+        </p>
+      </section>
+      <section class="slide">
+        <h2>How it works</h2>
+        <ol class="large">
+          <li>Use HTML to write your presentation</li>
+          <li>Use browser to review and present</li>
+          <li>Focus on content, not presentation ;)</li>
+        </ol>
+      </section>
+      <section class="slide">
+        <h2>For web developers, by web developer</h2>
+        <span class="todo">image</span>
+      </section>
+      <section class="slide">
+        <h2>How to use it</h2>
+        <ol>
+          <li>Download presentation template</li>
+          <li>Open index.html in your favourite HTML editor</li>
+          <li>Use provided examples and comments as a reference</li>
+          <li>Optionaly setup browser auto-refresh<br/>
+            <small><a href="https://github.com/tapio/live-server">Live Server</a>
+              for Node.js is a good choice</small>
+          </li>
+        </ol>
+      </section>
+      <section class="slide">
+        <h2>Keyboard controls</h2>
+        <p>Should work with remote presenters</p>
+        <p class="large"><kbd>→</kbd>, <kbd>Space</kbd> to go to next slide</p>
+        <p class="large"><kbd>←</kbd> to go to previous slide</p>
+        <p class="large"><kbd>Esc</kbd> to go back to slide sorter</p>
+      </section>
+      <section class="slide">
+        <h2>Mouse controls</h2>
+        <p>Wireless mouse could be used as a remote presenter</p>
+        <p class="large"><strong>Scroll down</strong> to go to next slide</p>
+        <p class="large"><strong>Scroll up</strong> to go to previous slide</p>
+        <p class="">Can be disabled in presentation options</p>
+      </section>
+      <section class="slide">
+        <h2>Touch controls</h2>
+        <p>For reviewing on the go</p>
+        <p class="large"><strong>Swipe left</strong> to go to next slide</p>
+        <p class="large"><strong>Swipe right</strong> to go to previous slide</p>
+        <p class="large"><strong>Pinch out</strong> to go back to slide sorter</p>
+      </section>
+      <section class="slide">
+        <h2>Slide sorter view</h2>
+        <p class="large">All slides at a glance</p>
+        <p>Use for quick review or to pick specific slide</p>
+        <span class="todo">Add screenshot</span>
+      </section>
+      <section class="slide">
+        <h2>Well-behaved urls</h2>
+        <p class="small">Slidy uses hash part (fragment identifier) of the page url to keep
+        track of slideshow state</p>
+        <ul>
+          <li>
+            Each slide is directly linkable<br>
+            <span class="small">
+              Link to <a href="#slidy-8">previous slide</a>
+            </span>
+          </li>
+          <li>Position is preserved through browser refresh</li>
+          <li>Back button brings back slide sorter, not previous
+            slide</li>
+        </ol>
+      </section>
+      <section class="slide">
+        <h2>Adaptive aspect ratio</h2>
+        <ul>
+          <li>Slides always fit the screen, try resizing your browser!</li>
+          <li><a href="/">Slide sorter</a> also adapts to screen size and aspect
+            ratio</li>
+        </ul>
+        <p class="large">Focus on content instead of layout</p>
+        <p>Overflow gives you annoying scrollbars, which bring attention to
+          problematic slide, but still show all the content</p>
+        <p class="todo">
+          http://www.indiedb.com/games/destination-facepunch/images
+        </p>
+      </section>
+      <section class="slide">
+        <h2>Todo markup</h2>
+        <p>Built-in style for marking work-in-progress parts of the
+          presentaion</p>
+        <p>Very useful during autoring</p>
+        <ul class="small">
+          <li>Use your presentation as a to-do list</li>
+          <li>Never forget to remove or update to-do item before
+            presenting</li>
+          <li class="todo">Add usage examples for elements and whole
+            slides</li>
+        </ul>
+      </section>
+      <section class="slide">
+        <h2>Full screen</h2>
+      </section>
+      <section class="slide todo">
+        <h2>Slide numbers</h2>
+      </section>
+      <section class="slide">
+        <h1>Structure (out of scope)</h1>
+        <ul>
+          <li>
+            Use nested list to structure presentations
+            <ol>
+              <li>Presentation</li>
+              <li>Section</li>
+              <li>(Sub-section)</li>
+              <li>Slide</li>
+              <li>List item</li>
+              <li>(Sub-list item)</li>
+            </ol>
+          </li>
+      </section>
+      <section class="slide">
+          <li>Bonus goal: produce handouts and presenter notes ready for
+            printing</li>
+        </ul>
+      </section>
+      <section class="slide">
+          <li>Bonus goal: produce handouts and presenter notes ready for
+            printing</li>
+        </ul>
+      </section>
+    </section>
+  </body>
+</html>
