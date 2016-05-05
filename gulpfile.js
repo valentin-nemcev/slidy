@@ -5,6 +5,9 @@ const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const browserify = require('browserify');
 const babelify = require('babelify');
+
+const uglify = require('gulp-uglify');
+
 require('gulp-watch');
 const server = require('gulp-server-livereload');
 const eslint = require('gulp-eslint');
@@ -42,8 +45,7 @@ gulp.task('build-js', () => {
     .pipe(source('slidy.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-    // Add transformation tasks to the pipeline here.
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist/'));
 });
@@ -51,7 +53,7 @@ gulp.task('build-js', () => {
 gulp.task('build-css', () =>
   gulp.src('./src/css/slidy.styl')
     .pipe(sourcemaps.init())
-    .pipe(stylus())
+    .pipe(stylus({compress: true}))
     .on('error', function (error) { gutil.log(error); this.emit('end'); })
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./dist/'))
