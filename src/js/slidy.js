@@ -6,6 +6,12 @@ import SlidyRouter from './router';
 import SlidyDeck from './deck';
 import clearSelection from './clearSelection';
 
+// For IE9
+import 'html5-history-api';
+
+// No / after # in url
+window.history.setup(null, '');
+
 import jQueryMousewheel from 'jquery-mousewheel';
 import throttle from 'throttle-debounce/throttle';
 

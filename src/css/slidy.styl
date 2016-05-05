@@ -12,44 +12,55 @@ normalize()
 html, body
   height: 100%
 
-$slide-spacing = 1rem
-$slide-aspect-ratio = (4/3)
-$slides-in-row = 4
+$slide-spacing = 1.5em
 $slide-padding = 12% // Both sides
+$slide-font-size = 3vw
+
+for i in 1..6
+  @media (min-width: (i*300)px)
+    $slides-in-row = i
+
+    .slide
+
+      // Adaptive padding
+      &:not(.presented)
+        padding: 0 ($slide-padding / $slides-in-row / 2);
+      &.presented
+        padding: 0 ($slide-padding / 2);
+      &::before, &::after
+        display: block;
+        content: "";
+        height: ($slide-padding / 2);
+
+
+      &:not(.presented)
+        font-size: ($slide-font-size / $slides-in-row)
+
+        display: inline-block
+
+        width: "calc(%s - %s)" % \
+          ((100 / $slides-in-row)% $slide-spacing)
+        height: "calc(%s - %s)" % \
+          ((100 / $slides-in-row)% ($slide-spacing))
+
 
 .presentation
   font-size: 1.125em
   display: flex
   flex-wrap: wrap
   justify-content: flex-start
+  align-content: flex-start
   padding-top: $slide-spacing
   padding-left: $slide-spacing
-
   height: 100%
+
 
 .slide
 
-  // Adaptive padding
   &:not(.presented)
-    padding: 0 ($slide-padding / $slides-in-row / 2);
-  &.presented
-    padding: 0 ($slide-padding / 2);
-  &::before, &::after
-    display: block;
-    content: "";
-    height: ($slide-padding / 2);
-
-
-  &:not(.presented)
-    font-size: 50%
 
     display: inline-block
 
-    width: "calc(%s - %s)" % \
-      ((100 / $slides-in-row)% $slide-spacing)
-    height: "calc(%s - %s)" % \
-      ((100 / $slides-in-row)% ($slide-spacing))
-    // min-height: 25%
     margin-bottom: $slide-spacing
     margin-right: $slide-spacing
 
@@ -67,6 +78,7 @@ $slide-padding = 12% // Both sides
       margin-left: -0.5em
 
   &.presented
+    font-size: $slide-font-size
 
     position: fixed
 
