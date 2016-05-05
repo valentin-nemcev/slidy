@@ -17,7 +17,9 @@ export default class SlidyRouter {
 
   _clearHash() {
     const loc = this._window.location;
-    this._window.history.pushState(null, null, loc.pathname + loc.search);
+    // Prevent double update when hash is empty
+    const method = loc.hash === '' ? 'replaceState' : 'pushState';
+    this._window.history[method](null, null, loc.pathname + loc.search);
   }
 
   _getCurrentPath() {
