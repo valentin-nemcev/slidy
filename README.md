@@ -1,6 +1,7 @@
 # Slidy
 Web framework for authoring and showing presentations.  
-See self-describing **[demo](https://valentin-nemcev.github.io/slidy/)** to learn more.
+See self-describing **[demo](https://valentin-nemcev.github.io/slidy/)** to learn more.  
+Also check out short [description](/ABOUT.md) (in Russian) about how this project was made.
 
 ## Using
 Download presentation [template](https://valentin-nemcev.github.io/slidy/slidy.zip),
