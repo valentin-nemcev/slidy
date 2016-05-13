@@ -6,7 +6,7 @@
   "scripts": {
     "test-watch": "mocha --watch --opts tests/.mocharc tests/index.js",
     "test": "mocha --opts tests/.mocharc tests/index.js",
-    "dev-server": "live-server",
+    "dev-server": "gulp dev-server",
     "build": "gulp clean build",
     "gh-pages": "gulp gh-pages",
     "doc": "esdoc -c esdoc.json",
